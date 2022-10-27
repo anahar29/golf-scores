@@ -1,0 +1,103 @@
+##
+# Golf Scores Calculator 
+#
+# @ Alisha M.
+# @date 2022/04/09 - LastModified
+##
+
+# INTRO TITLE
+print()
+intro = "Golf Scores Machine "
+completed_intro = intro.center(73, " ")
+print(completed_intro)
+print()
+
+# store scores and player names  
+names = ""
+score_values = []
+players = []
+
+# Get player names from user
+while (names != "done"):
+  names= input("Enter players, enter done when complete: ")
+  if (names != "done"):
+    players.append(names)
+    score_values.append(0)
+
+print()
+# validation for number of holes
+valid = False
+while (not valid ):
+  
+  # Get number of holes from user
+  try:
+    numOfHoles = int(input("Enter number of holes: "))
+    if(numOfHoles > 0):
+      valid = True 
+    else:
+      print("Invalid Entry")
+  except:
+      print("Enter a number")
+      
+# Score header for each round
+for i in range (numOfHoles):
+  holeNumber = str(i+1)
+  print()
+  print("Scores on hole ", holeNumber,)
+  print()
+
+  # Get score from each player and store them
+  for p in range (len(players)):
+
+    valid = False
+    try:
+      scoretypes = ["bogey", "par", "eagle", "birdie"]
+    
+      while(not valid):
+        scores = input(f"{players[p]}: ")
+    
+        if (scores in scoretypes):
+          valid = True
+          
+          if (scores == "bogey"):
+            score_values[p] = score_values[p] + 1
+            
+          elif (scores == "par"):
+            score_values[p] = score_values[p] + 0 
+            
+          elif (scores == "birdie"):
+            score_values[p] = score_values[p] - 1
+            
+          else:
+            score_values[p] = score_values[p] - 2
+        else:
+          print("Invalid entry")
+    except:
+      print("Invalid score entry")
+    score_values.append(score_values[p])
+  print()
+
+# Print running scores each round
+  print("Current Scores:", end="")
+  for s in range (len(players)):
+    print(f" {players[s]} ({score_values[s]})", end="")
+
+# Final scores - display each players score 
+print()
+for z in range (len(players)):
+  if (score_values[z] < 0):
+    print(f"{players[z]} is {-score_values[z]} under par")
+
+  elif (score_values[z] == 0):
+    print(f"{players[z]} is equal to par")
+
+  else:
+    print(f"{players[z]} is {score_values[z]} over par")
+    
+      
+  
+  
+
+
+
+
